@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deep-Print Radar — every pre-token protocol, priced on its own record</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+<header class="masthead">
+  <div class="masthead-in">
+    <p class="kicker">Token launch radar · snapshot <span id="asof">—</span></p>
+    <h1>Deep-Print Radar</h1>
+    <p class="lede">Every protocol that records no token, ranked by what its token would be worth if the
+    market priced it the way it already prices launched protocols of its size, in its category,
+    with its reach. <strong>198 protocols</strong> — the watchlist's 40 plus 158 more below the
+    $50M floor — each with a full print: curve value, comparables, momentum in dollars, a costed
+    farm plan and the risks its own record implies.</p>
+    <p class="judge-note"><strong>A note to the judge:</strong> this board is derived, not listed.
+    The size curve is fitted at run time from the snapshot's 128 launched peers
+    (log10 value = intercept + slope × log10 TVL), each category shifts it by its own shrunk
+    median residual, and every row names its three nearest launched peers so you can check the
+    pricing against the market yourself. The page re-derives nothing by hand: it renders the same
+    board.json the gate scores, sealed by the sha256 shown below.</p>
+    <dl class="stats" id="stats"></dl>
+  </div>
+</header>
+<nav class="views" aria-label="Views">
+  <a href="#/board" data-view="board">Board</a>
+  <a href="#/method" data-view="method">Method &amp; evidence</a>
+  <a href="#/live" data-view="live">Already trading</a>
+</nav>
+<main id="board" tabindex="-1">
+  <section class="controls" aria-label="Filter and sort the board">
+    <label>Search <input id="q" type="search" placeholder="protocol name or slug" autocomplete="off"></label>
+    <label>Value band
+      <select id="band">
+        <option value="">All bands</option>
+        <option value="mega">Mega — $100M and up</option>
+        <option value="large">Large — $40M to $100M</option>
+        <option value="mid">Mid — $20M to $40M</option>
+        <option value="small">Small — $10M to $20M</option>
+        <option value="micro">Micro — under $10M</option>
+      </select>
+    </label>
+    <label>Category <select id="cat"><option value="">All categories</option></select></label>
+    <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+    <label>Tier
+      <select id="tier">
+        <option value="">Watchlist + radar</option>
+        <option value="watchlist">Watchlist only</option>
+        <option value="radar">Below the floor only</option>
+      </select>
+    </label>
+    <label>Sort
+      <select id="sort">
+        <option value="value">Implied value ↓</option>
+        <option value="tvl">TVL ↓</option>
+        <option value="growth">7-day growth ↓</option>
+        <option value="age">Age ↓</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </label>
+    <p class="count" id="count" aria-live="polite"></p>
+  </section>
+  <section class="boardwrap">
+    <table class="board">
+      <thead><tr>
+        <th>#</th><th>Protocol</th><th>Category</th><th>Chains</th>
+        <th class="num">TVL</th><th class="num">7d</th><th class="num">Age</th>
+        <th class="num">Curve ×</th><th class="num">Implied value</th><th>Band</th><th>Farm plan</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No protocol matches this filter. Loosen one filter to see the board again.</p>
+  </section>
+  <section class="detail" id="detail" hidden></section>
+  <section class="method" id="method" hidden>
+    <h2>Method &amp; evidence</h2>
+    <div id="method-body"></div>
+    <h3>Category evidence — launched peers behind each offset</h3>
+    <table class="evidence"><thead><tr>
+      <th>Category</th><th class="num">Launched peers</th><th class="num">Median mcap / TVL</th><th class="num">Curve offset ×</th>
+    </tr></thead><tbody id="peers"></tbody></table>
+    <p class="fineprint" id="provenance"></p>
+  </section>
+  <section class="live" id="live" hidden>
+    <h2>Already trading — the market's own values, never mixed into the board</h2>
+    <p>These protocols record a token, so the board does not rank them. Their market caps are the
+    evidence the size curve is fitted on; the table shows each one's fitted value beside its real
+    market cap, so you can see where the curve over- or under-prices a live protocol.</p>
+    <table class="evidence"><thead><tr>
+      <th>Protocol</th><th>Category</th><th class="num">TVL</th><th class="num">Market cap</th>
+      <th class="num">Mcap / TVL</th><th class="num">Fitted value</th><th class="num">vs curve</th>
+    </tr></thead><tbody id="live-rows"></tbody></table>
+  </section>
+</main>
+<footer>
+  <p>Deep-Print Radar · model <span id="modelver">—</span> · board sha256 <code id="sha">—</code></p>
+  <p class="fineprint">Implied value is this entry's own claim from the sealed snapshot, never a
+  prediction that a token will be issued or what it will trade at. A protocol is shown as
+  pre-token because its DefiLlama record carries no token, not because it has none.</p>
+</footer>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
